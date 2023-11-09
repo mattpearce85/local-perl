@@ -80,7 +80,7 @@
 - Let's edit that Perl code... Open the following file from the cloned repo in your IDE or a text editor. It will be somewhere like: `~/webroot/index.pl` 
 - Make some changes, save the file, and then refresh your web browser. Do you see your changes? Good!
 
-### Creating a MySQL database for your Laravel application
+### Creating a MySQL database for your application
 
 - Make sure your servers are running and then open your browser to ```http://pma.localhost```
 - Login using the username `root` and the password `mysqltemp`
