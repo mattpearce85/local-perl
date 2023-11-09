@@ -67,9 +67,9 @@
 
 ```sudo docker exec -it perl bash```
 
-- Now we've jumped into the virtual machine, and jumped deeper still into the Perl Docker container. We should be ready to run Perl scripts from the command-line. For example, execute the following command to run our plain Perl file:
+- Now we've jumped into the virtual machine, and jumped deeper still into the Perl Docker container. We should be ready to run Perl scripts from the command-line. For example, execute the following command to run our Perl file:
 
-```perl perl/index.pl```
+```perl index.pl```
 
 - This command runs the Perl compiler on the specified file. In this case, the file just outputs some HTML code. The command line doesn't interpret HTML, so it's just plain text. How about running it in a web browser?
 
@@ -77,7 +77,7 @@
 
 - Make sure your local server resources are running using the docker-compose command above
 - Open your web browser to `http://perl.localhost/index.pl`
-- Let's edit that Perl code... Open the following file from the cloned repo in your IDE or a text editor. It will be somewhere like: `~/webroot/perl/plain-perl/index.pl` 
+- Let's edit that Perl code... Open the following file from the cloned repo in your IDE or a text editor. It will be somewhere like: `~/webroot/index.pl` 
 - Make some changes, save the file, and then refresh your web browser. Do you see your changes? Good!
 
 ### Creating a MySQL database for your Laravel application
