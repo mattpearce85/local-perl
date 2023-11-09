@@ -1,0 +1,81 @@
+version: '3'
+services:
+
+  #Perl Service
+  perl:
+    build: ./perl
+    container_name: perl
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: perl
+      SERVICE_TAGS: dev
+    working_dir: /var/www/html
+    volumes:
+      - ./webroot:/var/www/html
+    networks:
+      - app-network
+
+  #MySQL Service
+  mysql:
+    image: mysql:8.0.16
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    user: "1000:50"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqltemp
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./mysql/mysql:/var/lib/mysql
+      - ./mysql/conf:/etc/mysql/conf.d
+    networks:
+      - app-network
+
+  #PhpMyAdmin Service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "9001:80"
+    environment:
+      PMA_HOST: mysql
+    networks:
+      - app-network
+
+  #Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./webroot:/var/www/html
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./nginx/ssl:/usr/local/nginx/conf/ssl
+    depends_on:
+      - perl
+      - phpmyadmin
+    networks:
+      app-network:
+        aliases:
+          - api.localhost
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
