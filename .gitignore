@@ -2,7 +2,6 @@
 /.vagrant/
 /ubuntu-bionic-18.04-cloudimg-console.log
 
-!/webroot/index.pl
-/webroot/*
+/webroot/private/*
 
 /mysql/mysql/*
